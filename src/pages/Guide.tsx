@@ -86,7 +86,18 @@ const Guide = () => {
                 <h3 className="text-lg font-medium mb-2">Pages & Routing</h3>
                 <div className="space-y-3">
                   <div>
-                    <Badge variant="outline">File-system Based Routing</Badge>
+                    <Badge 
+                      variant="outline" 
+                      className="cursor-pointer hover:bg-primary/10 transition-colors"
+                      onClick={() => {
+                        toast({
+                          title: "File-system Based Routing",
+                          description: "Create a file in the pages directory to automatically create a route at that path.",
+                        });
+                      }}
+                    >
+                      File-system Based Routing
+                    </Badge>
                     <p className="mt-2 text-sm text-muted-foreground">
                       Next.js uses a file-system based router where:
                       - Files in pages/ become routes automatically
@@ -96,7 +107,18 @@ const Guide = () => {
                     </p>
                   </div>
                   <div>
-                    <Badge variant="outline">Dynamic Routes</Badge>
+                    <Badge 
+                      variant="outline"
+                      className="cursor-pointer hover:bg-primary/10 transition-colors"
+                      onClick={() => {
+                        toast({
+                          title: "Dynamic Routes Example",
+                          description: "pages/blog/[slug].js → /blog/hello-world",
+                        });
+                      }}
+                    >
+                      Dynamic Routes
+                    </Badge>
                     <p className="mt-2 text-sm text-muted-foreground">
                       Create dynamic routes using square brackets:
                       - [id].js for single dynamic segments
@@ -106,7 +128,18 @@ const Guide = () => {
                     </p>
                   </div>
                   <div>
-                    <Badge variant="outline">Route Groups</Badge>
+                    <Badge 
+                      variant="outline"
+                      className="cursor-pointer hover:bg-primary/10 transition-colors"
+                      onClick={() => {
+                        toast({
+                          title: "Route Groups Example",
+                          description: "(marketing)/about.js creates /about without including 'marketing' in the URL",
+                        });
+                      }}
+                    >
+                      Route Groups
+                    </Badge>
                     <p className="mt-2 text-sm text-muted-foreground">
                       Organize routes without affecting URL structure:
                       - (marketing)/about.js creates /about
@@ -121,7 +154,16 @@ const Guide = () => {
                 <h3 className="text-lg font-medium mb-2">Data Fetching</h3>
                 <div className="space-y-3">
                   <div>
-                    <Badge variant="outline">Static Generation (getStaticProps)</Badge>
+                    <Badge 
+                      variant="outline"
+                      className="cursor-pointer hover:bg-primary/10 transition-colors"
+                      onClick={() => copyToClipboard(`export async function getStaticProps() {
+  const data = await fetchData();
+  return { props: { data } };
+}`)}
+                    >
+                      Static Generation (getStaticProps)
+                    </Badge>
                     <p className="mt-2 text-sm text-muted-foreground">
                       Pre-render pages at build time:
                       - Perfect for blogs, documentation
@@ -131,7 +173,16 @@ const Guide = () => {
                     </p>
                   </div>
                   <div>
-                    <Badge variant="outline">Server-side Rendering (getServerSideProps)</Badge>
+                    <Badge 
+                      variant="outline"
+                      className="cursor-pointer hover:bg-primary/10 transition-colors"
+                      onClick={() => copyToClipboard(`export async function getServerSideProps(context) {
+  const data = await fetchData(context.params);
+  return { props: { data } };
+}`)}
+                    >
+                      Server-side Rendering (getServerSideProps)
+                    </Badge>
                     <p className="mt-2 text-sm text-muted-foreground">
                       Generate pages on each request:
                       - Real-time data requirements
@@ -305,19 +356,43 @@ const Guide = () => {
                   <XCircle className="w-4 h-4 text-red-500" />
                   Hydration Errors
                 </h3>
-                <pre className="bg-red-500/10 text-red-600 p-4 rounded-md text-sm mb-2">
+                <pre className="bg-red-500/10 text-red-600 p-4 rounded-md text-sm mb-2 cursor-pointer"
+                  onClick={() => copyToClipboard(`Text content does not match server-rendered HTML`)}
+                >
                   {`Text content does not match server-rendered HTML`}
                 </pre>
                 <div className="space-y-2">
                   <div className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
-                    <p className="text-sm">Use useEffect for client-side only code</p>
+                    <p className="text-sm cursor-pointer hover:text-primary/80"
+                      onClick={() => {
+                        toast({
+                          title: "Solution Tip",
+                          description: "Move client-side specific code into useEffect to avoid hydration mismatches.",
+                        });
+                      }}
+                    >
+                      Use useEffect for client-side only code
+                    </p>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
-                    <p className="text-sm">Ensure consistent props between server and client</p>
+                    <p className="text-sm cursor-pointer hover:text-primary/80"
+                      onClick={() => {
+                        toast({
+                          title: "Solution Tip",
+                          description: "Make sure your server and client components receive and render the same props.",
+                        });
+                      }}
+                    >
+                      Ensure consistent props between server and client
+                    </p>
                   </div>
-                  <pre className="bg-emerald-500/10 text-emerald-600 p-4 rounded-md text-sm mt-2">
+                  <pre className="bg-emerald-500/10 text-emerald-600 p-4 rounded-md text-sm mt-2 cursor-pointer"
+                    onClick={() => copyToClipboard(`useEffect(() => {
+  // Client-side code here
+}, []);`)}
+                  >
                     {`useEffect(() => {
   // Client-side code here
 }, []);`}
