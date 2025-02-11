@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ThemeToggle } from './ThemeToggle';
 
 const Navigation = () => {
   return (
@@ -19,6 +20,7 @@ const Navigation = () => {
           <Link to="/guide" className="text-sm font-medium hover:text-primary/80 transition-colors">
             Guide
           </Link>
+          <ThemeToggle />
         </div>
       </div>
     </nav>
