@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import { Card } from '@/components/ui/card';
@@ -25,32 +24,150 @@ const Guide = () => {
               <Book className="w-5 h-5 text-primary" />
               <h2 className="text-xl font-semibold">Core Concepts</h2>
             </div>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-2">
-                <Badge variant="outline">Pages & Routing</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Understanding file-system based routing, dynamic routes, and route groups. Learn how to create static and dynamic pages, handle URL parameters, and implement nested routing patterns.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Badge variant="outline">Data Fetching</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Master different data fetching methods: getStaticProps for static generation, getServerSideProps for server-side rendering, and SWR/React Query for client-side data fetching.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Badge variant="outline">Layouts</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Create reusable layouts with app directory, implement nested layouts, and manage shared UI elements. Learn about layout groups and templates for flexible page structures.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Badge variant="outline">API Routes</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Build serverless API endpoints, handle HTTP methods, implement API middleware, and integrate with databases. Learn best practices for API route organization and error handling.
-                </span>
-              </li>
-            </ul>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium mb-2">Pages & Routing</h3>
+                <div className="space-y-3">
+                  <div>
+                    <Badge variant="outline">File-system Based Routing</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Next.js uses a file-system based router where:
+                      - Files in pages/ become routes automatically
+                      - pages/index.js becomes the / route
+                      - pages/about.js becomes /about
+                      - pages/blog/[slug].js handles dynamic blog posts
+                    </p>
+                  </div>
+                  <div>
+                    <Badge variant="outline">Dynamic Routes</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Create dynamic routes using square brackets:
+                      - [id].js for single dynamic segments
+                      - [...slug].js for catch-all routes
+                      - [[...slug]].js for optional catch-all routes
+                      Access route parameters via useRouter() hook
+                    </p>
+                  </div>
+                  <div>
+                    <Badge variant="outline">Route Groups</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Organize routes without affecting URL structure:
+                      - (marketing)/about.js creates /about
+                      - (shop)/products/[id].js creates /products/[id]
+                      Useful for keeping related pages together
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-2">Data Fetching</h3>
+                <div className="space-y-3">
+                  <div>
+                    <Badge variant="outline">Static Generation (getStaticProps)</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Pre-render pages at build time:
+                      - Perfect for blogs, documentation
+                      - Data available during build
+                      - Fastest page loads
+                      - Can be cached by CDN
+                    </p>
+                  </div>
+                  <div>
+                    <Badge variant="outline">Server-side Rendering (getServerSideProps)</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Generate pages on each request:
+                      - Real-time data requirements
+                      - Access to request/response
+                      - SEO requirements with dynamic data
+                      - Protected pages needing authentication
+                    </p>
+                  </div>
+                  <div>
+                    <Badge variant="outline">Client-side Data Fetching</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Fetch data on the client using:
+                      - SWR for automatic revalidation
+                      - React Query for complex data management
+                      - useState + useEffect for simple cases
+                      Best for frequently updated, user-specific data
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-2">Layouts & Components</h3>
+                <div className="space-y-3">
+                  <div>
+                    <Badge variant="outline">App Directory Layouts</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Create consistent layouts:
+                      - layout.js defines shared UI
+                      - Nested layouts for sections
+                      - Layout groups for variations
+                      - Templates for per-page layouts
+                    </p>
+                  </div>
+                  <div>
+                    <Badge variant="outline">Component Architecture</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Build reusable components:
+                      - Smart vs Presentational
+                      - Server vs Client Components
+                      - Component composition patterns
+                      - Props and type safety
+                    </p>
+                  </div>
+                  <div>
+                    <Badge variant="outline">Metadata & SEO</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Optimize for search engines:
+                      - Page-level metadata
+                      - Open Graph tags
+                      - JSON-LD structured data
+                      - Dynamic meta tags
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-2">API Routes</h3>
+                <div className="space-y-3">
+                  <div>
+                    <Badge variant="outline">API Route Handlers</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Create serverless API endpoints:
+                      - Handle HTTP methods
+                      - Access request/response
+                      - Parse query parameters
+                      - Validate request body
+                    </p>
+                  </div>
+                  <div>
+                    <Badge variant="outline">Middleware & Authentication</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Protect API routes:
+                      - Custom middleware
+                      - JWT validation
+                      - Rate limiting
+                      - Error handling
+                    </p>
+                  </div>
+                  <div>
+                    <Badge variant="outline">Database Integration</Badge>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Connect to databases:
+                      - ORM setup (Prisma, Drizzle)
+                      - Connection pooling
+                      - Query optimization
+                      - Error handling
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </Card>
 
           <Card className="p-6 animate-fade-up" style={{ animationDelay: "150ms" }}>
