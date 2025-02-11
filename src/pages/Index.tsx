@@ -10,20 +10,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Book, Code, Terminal, Github } from 'lucide-react';
 
 const beginnerPath = {
-  title: "Next.js Fundamentals",
-  description: "Master the basics of Next.js development through hands-on learning and practical examples.",
+  title: "Next.js Platform Engineering",
+  description: "Essential skills for Developer Experience Engineering at Vercel, focusing on Next.js and platform capabilities.",
   steps: [
     {
-      title: "Understanding Pages & Routing",
-      description: "Learn how Next.js handles file-based routing and navigation."
+      title: "App Router & Edge Runtime",
+      description: "Master Next.js 13+ App Router and Edge Runtime capabilities for global deployment."
     },
     {
-      title: "Data Fetching Methods",
-      description: "Explore different ways to fetch and manage data in Next.js."
+      title: "Platform Integration",
+      description: "Learn to leverage Vercel's platform features including Edge Functions, KV, and Edge Config."
     },
     {
-      title: "Static & Dynamic Rendering",
-      description: "Master the concepts of SSG and SSR in Next.js."
+      title: "Developer Experience",
+      description: "Implement tools and practices that enhance developer productivity and satisfaction."
     }
   ]
 };
