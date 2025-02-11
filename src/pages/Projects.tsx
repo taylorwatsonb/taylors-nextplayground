@@ -7,10 +7,10 @@ import { Clock, Code, GitFork, Bookmark, Layout, Image, Lock, ShoppingCart, Glob
 const projects = [
   {
     title: "Technical Documentation Site",
-    description: "Build a comprehensive documentation site with search, navigation, and interactive code examples. Perfect as a writing sample!",
-    duration: "4 hours",
-    difficulty: "Intermediate",
-    topics: ["Documentation", "MDX", "Search"]
+    description: "Comprehensive documentation platform featuring interactive code playgrounds, troubleshooting guides, and API references. Includes search functionality, versioned docs, and integrated testing of code examples. Perfect writing sample for technical documentation roles!",
+    duration: "6 hours",
+    difficulty: "Advanced",
+    topics: ["Documentation", "MDX", "Search", "Interactive Examples", "Troubleshooting", "API Reference"]
   },
   {
     title: "Authentication System",
