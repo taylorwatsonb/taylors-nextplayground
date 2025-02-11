@@ -3,7 +3,7 @@ import React from 'react';
 import Navigation from '@/components/Navigation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AlertCircle, Book, Code, Zap, Layout, Database, Globe, Cpu, Lock, Search, Performance, Terminal } from 'lucide-react';
+import { AlertCircle, Book, Code, Zap, Layout, Database, Globe, Cpu, Lock, Search, Activity, Terminal } from 'lucide-react';
 
 const Guide = () => {
   return (
