@@ -9,8 +9,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const Documentation = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,9 +18,35 @@ const Documentation = () => {
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [feedbackType, setFeedbackType] = useState<'helpful' | 'not-helpful'>('helpful');
   const [feedbackText, setFeedbackText] = useState('');
+  const [playgroundCode, setPlaygroundCode] = useState(`// Try our API
+const response = await fetch('/api/hello');
+const data = await response.json();
+console.log(data);`);
   const { toast } = useToast();
 
   const versions = ['v1.0', 'v0.9', 'v0.8'];
+
+  const handleRunCode = async () => {
+    try {
+      // For demonstration purposes, we'll just show the code in a toast
+      toast({
+        title: "Code Execution",
+        description: "Code playground feature is in development. Check console for output.",
+      });
+      console.log("Executing code:", playgroundCode);
+      // In a real implementation, you would:
+      // 1. Sanitize the code
+      // 2. Run it in a sandboxed environment
+      // 3. Handle the output
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to execute code. Check console for details.",
+        variant: "destructive",
+      });
+      console.error("Code execution error:", error);
+    }
+  };
 
   const documentationSections = [
     {
@@ -84,17 +110,16 @@ const Documentation = () => {
             <div className="space-y-4">
               <textarea 
                 className="w-full h-32 p-2 font-mono text-sm bg-muted rounded-lg"
-                defaultValue={`// Try our API
-const response = await fetch('/api/hello');
-const data = await response.json();
-console.log(data);`}
+                value={playgroundCode}
+                onChange={(e) => setPlaygroundCode(e.target.value)}
               />
-              <button
+              <Button
                 onClick={handleRunCode}
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90"
+                className="flex items-center gap-2"
               >
+                <Terminal className="h-4 w-4" />
                 Run Code
-              </button>
+              </Button>
             </div>
           </Card>
         </div>
