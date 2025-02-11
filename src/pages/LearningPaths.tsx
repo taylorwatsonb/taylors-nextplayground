@@ -6,37 +6,79 @@ import LearningPath from '@/components/LearningPath';
 const paths = [
   {
     title: "Next.js Fundamentals",
-    description: "Master the basics of Next.js development through hands-on learning and practical examples.",
+    description: "Start your journey with Next.js by mastering the core concepts and basic features.",
     steps: [
       {
-        title: "Understanding Pages & Routing",
-        description: "Learn how Next.js handles file-based routing and navigation."
+        title: "Project Setup & Structure",
+        description: "Learn how to create a new Next.js project and understand its directory structure."
       },
       {
-        title: "Data Fetching Methods",
-        description: "Explore different ways to fetch and manage data in Next.js."
+        title: "Routing & Navigation",
+        description: "Master file-based routing, dynamic routes, and navigation between pages."
       },
       {
-        title: "Static & Dynamic Rendering",
-        description: "Master the concepts of SSG and SSR in Next.js."
+        title: "Components & Layouts",
+        description: "Create reusable components and implement consistent layouts across pages."
+      },
+      {
+        title: "Data Fetching Basics",
+        description: "Learn getStaticProps and getServerSideProps for basic data fetching."
+      },
+      {
+        title: "Styling in Next.js",
+        description: "Explore CSS Modules, Tailwind CSS, and other styling approaches."
       }
     ]
   },
   {
-    title: "Advanced Next.js Features",
-    description: "Take your Next.js skills to the next level with advanced concepts and optimizations.",
+    title: "Intermediate Concepts",
+    description: "Dive deeper into Next.js features and learn advanced data handling techniques.",
+    steps: [
+      {
+        title: "Dynamic Routes & Params",
+        description: "Handle complex routing scenarios and URL parameters effectively."
+      },
+      {
+        title: "API Routes & Backend",
+        description: "Build API endpoints and handle server-side logic within Next.js."
+      },
+      {
+        title: "Image Optimization",
+        description: "Master the Image component and automatic image optimization."
+      },
+      {
+        title: "State Management",
+        description: "Implement client-side state management with React Context and SWR."
+      },
+      {
+        title: "Forms & Validation",
+        description: "Handle form submissions and implement client/server validation."
+      }
+    ]
+  },
+  {
+    title: "Advanced Features",
+    description: "Master advanced Next.js concepts and optimize your applications.",
     steps: [
       {
         title: "Middleware & Authentication",
-        description: "Implement authentication and protect routes using middleware."
+        description: "Implement custom middleware and secure your application."
       },
       {
-        title: "API Routes & Backend Integration",
-        description: "Build API routes and integrate with backend services."
+        title: "Incremental Static Regeneration",
+        description: "Optimize static content updates with ISR strategies."
       },
       {
         title: "Performance Optimization",
-        description: "Learn techniques to optimize your Next.js applications."
+        description: "Master code splitting, lazy loading, and performance monitoring."
+      },
+      {
+        title: "Internationalization",
+        description: "Implement multi-language support and localization."
+      },
+      {
+        title: "Deployment & CI/CD",
+        description: "Set up automated deployment pipelines and optimize for production."
       }
     ]
   }
@@ -52,7 +94,7 @@ const LearningPaths = () => {
             Learning Paths
           </h1>
           <p className="text-xl text-muted-foreground">
-            Structured paths to master Next.js development.
+            Follow structured paths to master Next.js development, from basics to advanced concepts.
           </p>
         </div>
         

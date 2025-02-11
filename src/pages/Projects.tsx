@@ -3,29 +3,50 @@ import React from 'react';
 import Navigation from '@/components/Navigation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Code, GitFork } from 'lucide-react';
+import { Clock, Code, GitFork, Bookmark, Layout, Image, Lock, ShoppingCart, Globe } from 'lucide-react';
 
 const projects = [
   {
-    title: "Dynamic Blog with MDX",
-    description: "Build a blog using Next.js and MDX for rich content authoring.",
-    duration: "2 hours",
-    difficulty: "Intermediate",
+    title: "Personal Blog with MDX",
+    description: "Create a dynamic blog using Next.js, MDX for content, and implement syntax highlighting.",
+    duration: "3 hours",
+    difficulty: "Beginner",
     topics: ["MDX", "Dynamic Routes", "Styling"]
   },
   {
     title: "Authentication System",
-    description: "Implement user authentication with Next.js and Supabase.",
-    duration: "3 hours",
-    difficulty: "Advanced",
+    description: "Build a complete auth system with email/password and social login using Next.js and Supabase.",
+    duration: "4 hours",
+    difficulty: "Intermediate",
     topics: ["Auth", "Database", "API Routes"]
   },
   {
+    title: "E-commerce Store",
+    description: "Develop a full-featured store with product listings, cart, and Stripe checkout.",
+    duration: "6 hours",
+    difficulty: "Advanced",
+    topics: ["Payments", "Cart Logic", "API Integration"]
+  },
+  {
     title: "Image Gallery",
-    description: "Create an optimized image gallery using Next.js Image component.",
-    duration: "1.5 hours",
+    description: "Build an optimized image gallery with lazy loading and blur placeholders.",
+    duration: "2 hours",
     difficulty: "Beginner",
     topics: ["Images", "Grid Layout", "Performance"]
+  },
+  {
+    title: "Real-time Chat",
+    description: "Create a real-time chat application using WebSockets and Supabase.",
+    duration: "5 hours",
+    difficulty: "Intermediate",
+    topics: ["Real-time", "WebSocket", "UI/UX"]
+  },
+  {
+    title: "Multi-language Site",
+    description: "Build an internationalized website supporting multiple languages.",
+    duration: "4 hours",
+    difficulty: "Advanced",
+    topics: ["i18n", "Routing", "SEO"]
   }
 ];
 
@@ -39,7 +60,7 @@ const Projects = () => {
             Hands-on Projects
           </h1>
           <p className="text-xl text-muted-foreground">
-            Learn by building real-world Next.js applications.
+            Build real-world applications to reinforce your Next.js knowledge.
           </p>
         </div>
 
