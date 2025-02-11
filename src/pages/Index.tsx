@@ -35,21 +35,23 @@ const documentationSections = [
     title: "API Reference",
     description: "Comprehensive API documentation with interactive examples, type definitions, and best practices.",
     badge: "New",
-    content: `
-      <h3 class="text-xl font-semibold mb-4">API Documentation</h3>
-      <div class="space-y-4">
-        <div class="border rounded-lg p-4">
-          <h4 class="font-medium mb-2">GET /api/courses</h4>
-          <p class="text-sm text-muted-foreground">Retrieve a list of available courses.</p>
-          <pre class="mt-2 bg-muted p-2 rounded"><code>GET /api/courses</code></pre>
-        </div>
-        <div class="border rounded-lg p-4">
-          <h4 class="font-medium mb-2">POST /api/enroll</h4>
-          <p class="text-sm text-muted-foreground">Enroll in a specific course.</p>
-          <pre class="mt-2 bg-muted p-2 rounded"><code>POST /api/enroll { courseId: string }</code></pre>
+    content: (
+      <div>
+        <h3 className="text-xl font-semibold mb-4">API Documentation</h3>
+        <div className="space-y-4">
+          <div className="border rounded-lg p-4">
+            <h4 className="font-medium mb-2">GET /api/courses</h4>
+            <p className="text-sm text-muted-foreground">Retrieve a list of available courses.</p>
+            <pre className="mt-2 bg-muted p-2 rounded"><code>GET /api/courses</code></pre>
+          </div>
+          <div className="border rounded-lg p-4">
+            <h4 className="font-medium mb-2">POST /api/enroll</h4>
+            <p className="text-sm text-muted-foreground">Enroll in a specific course.</p>
+            <pre className="mt-2 bg-muted p-2 rounded"><code>POST /api/enroll {'{ courseId: string }'}</code></pre>
+          </div>
         </div>
       </div>
-    `
+    )
   },
   {
     id: "code",
@@ -57,13 +59,14 @@ const documentationSections = [
     title: "Code Examples",
     description: "Well-documented code samples with TypeScript and error handling patterns.",
     badge: "Popular",
-    content: `
-      <h3 class="text-xl font-semibold mb-4">Code Examples</h3>
-      <div class="space-y-4">
-        <div class="border rounded-lg p-4">
-          <h4 class="font-medium mb-2">Error Handling Pattern</h4>
-          <pre class="bg-muted p-2 rounded">
-<code>try {
+    content: (
+      <div>
+        <h3 className="text-xl font-semibold mb-4">Code Examples</h3>
+        <div className="space-y-4">
+          <div className="border rounded-lg p-4">
+            <h4 className="font-medium mb-2">Error Handling Pattern</h4>
+            <pre className="bg-muted p-2 rounded">
+              <code>{`try {
   const data = await fetchData();
   return data;
 } catch (error) {
@@ -71,10 +74,12 @@ const documentationSections = [
     console.error('API Error:', error.message);
   }
   throw error;
-}</code></pre>
+}`}</code>
+            </pre>
+          </div>
         </div>
       </div>
-    `
+    )
   },
   {
     id: "cli",
@@ -82,21 +87,23 @@ const documentationSections = [
     title: "CLI Tools",
     description: "Command-line tools and utilities for improved developer workflow.",
     badge: "Beta",
-    content: `
-      <h3 class="text-xl font-semibold mb-4">CLI Commands</h3>
-      <div class="space-y-4">
-        <div class="border rounded-lg p-4">
-          <h4 class="font-medium mb-2">Create New Project</h4>
-          <pre class="bg-muted p-2 rounded"><code>npx create-next-app@latest</code></pre>
-          <p class="text-sm text-muted-foreground mt-2">Creates a new Next.js project with recommended defaults.</p>
-        </div>
-        <div class="border rounded-lg p-4">
-          <h4 class="font-medium mb-2">Development Server</h4>
-          <pre class="bg-muted p-2 rounded"><code>npm run dev</code></pre>
-          <p class="text-sm text-muted-foreground mt-2">Starts the development server with hot reloading.</p>
+    content: (
+      <div>
+        <h3 className="text-xl font-semibold mb-4">CLI Commands</h3>
+        <div className="space-y-4">
+          <div className="border rounded-lg p-4">
+            <h4 className="font-medium mb-2">Create New Project</h4>
+            <pre className="bg-muted p-2 rounded"><code>npx create-next-app@latest</code></pre>
+            <p className="text-sm text-muted-foreground mt-2">Creates a new Next.js project with recommended defaults.</p>
+          </div>
+          <div className="border rounded-lg p-4">
+            <h4 className="font-medium mb-2">Development Server</h4>
+            <pre className="bg-muted p-2 rounded"><code>npm run dev</code></pre>
+            <p className="text-sm text-muted-foreground mt-2">Starts the development server with hot reloading.</p>
+          </div>
         </div>
       </div>
-    `
+    )
   },
   {
     id: "community",
@@ -104,22 +111,24 @@ const documentationSections = [
     title: "Community",
     description: "Join our community of developers, share knowledge, and contribute.",
     badge: "Active",
-    content: `
-      <h3 class="text-xl font-semibold mb-4">Join Our Community</h3>
-      <div class="space-y-4">
-        <p class="text-muted-foreground">Connect with other developers, share your knowledge, and get help from the community.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="border rounded-lg p-4">
-            <h4 class="font-medium mb-2">Discord Server</h4>
-            <p class="text-sm text-muted-foreground">Join our active Discord community for real-time discussions.</p>
-          </div>
-          <div class="border rounded-lg p-4">
-            <h4 class="font-medium mb-2">GitHub Discussions</h4>
-            <p class="text-sm text-muted-foreground">Participate in technical discussions and feature requests.</p>
+    content: (
+      <div>
+        <h3 className="text-xl font-semibold mb-4">Join Our Community</h3>
+        <div className="space-y-4">
+          <p className="text-muted-foreground">Connect with other developers, share your knowledge, and get help from the community.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="border rounded-lg p-4">
+              <h4 className="font-medium mb-2">Discord Server</h4>
+              <p className="text-sm text-muted-foreground">Join our active Discord community for real-time discussions.</p>
+            </div>
+            <div className="border rounded-lg p-4">
+              <h4 className="font-medium mb-2">GitHub Discussions</h4>
+              <p className="text-sm text-muted-foreground">Participate in technical discussions and feature requests.</p>
+            </div>
           </div>
         </div>
       </div>
-    `
+    )
   }
 ];
 
@@ -190,9 +199,9 @@ const Index = () => {
                   <TabsContent 
                     key={section.id} 
                     value={section.id}
-                    className="border rounded-lg p-6"
-                    dangerouslySetInnerHTML={{ __html: section.content }}
-                  />
+                  >
+                    {section.content}
+                  </TabsContent>
                 ))}
               </div>
             </Tabs>
