@@ -6,8 +6,8 @@ import LearningPath from '@/components/LearningPath';
 import { useToast } from '@/hooks/use-toast';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Book, Code, Terminal, Github, Layout, Database, Globe, Cpu, Lock, Search, Activity } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Book, Code, Terminal, Github } from 'lucide-react';
 
 const beginnerPath = {
   title: "Next.js Fundamentals",
@@ -194,6 +194,13 @@ const Index = () => {
                   </Card>
                 ))}
               </div>
+              <TabsList className="mt-6">
+                {documentationSections.map((section) => (
+                  <TabsTrigger key={section.id} value={section.id}>
+                    {section.title}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
               <div className="mt-8">
                 {documentationSections.map((section) => (
                   <TabsContent 
