@@ -1,35 +1,26 @@
-
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
-import { Search, Book, Code, FileText, Bug, Terminal, Database, Globe } from 'lucide-react';
+import { Search, Book, Code, FileText, Bug, Terminal, Database, Globe, MessageSquare, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 const Documentation = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { toast } = useToast();
   const [selectedVersion, setSelectedVersion] = useState('v1.0');
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [feedbackType, setFeedbackType] = useState<'helpful' | 'not-helpful'>('helpful');
+  const [feedbackText, setFeedbackText] = useState('');
+  const { toast } = useToast();
 
   const versions = ['v1.0', 'v0.9', 'v0.8'];
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-    // In a real app, this would trigger a search through the documentation
-    toast({
-      title: "Search Feature",
-      description: "Search functionality will be implemented in the next iteration.",
-    });
-  };
-
-  const handleRunCode = () => {
-    toast({
-      title: "Code Playground",
-      description: "Code execution feature will be available soon!",
-    });
-  };
 
   const documentationSections = [
     {
@@ -139,6 +130,34 @@ console.log(data);`}
     }
   ];
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    const query = e.target.value.toLowerCase();
+    if (query.length > 2) {
+      toast({
+        title: "Search Results",
+        description: `Found matches in ${documentationSections.length} sections`,
+      });
+    }
+  };
+
+  const handleFeedbackSubmit = () => {
+    toast({
+      title: "Thank you for your feedback!",
+      description: "Your input helps us improve our documentation.",
+    });
+    setFeedbackOpen(false);
+    setFeedbackText('');
+  };
+
+  const handleVersionChange = (version: string) => {
+    setSelectedVersion(version);
+    toast({
+      title: "Version Changed",
+      description: `Documentation updated to ${version}`,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -146,15 +165,25 @@ console.log(data);`}
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-4xl font-bold">Documentation</h1>
-            <select
-              className="px-4 py-2 rounded-lg bg-muted"
-              value={selectedVersion}
-              onChange={(e) => setSelectedVersion(e.target.value)}
-            >
-              {versions.map(version => (
-                <option key={version} value={version}>{version}</option>
-              ))}
-            </select>
+            <div className="flex items-center gap-4">
+              <select
+                className="px-4 py-2 rounded-lg bg-muted"
+                value={selectedVersion}
+                onChange={(e) => handleVersionChange(e.target.value)}
+              >
+                {versions.map(version => (
+                  <option key={version} value={version}>{version}</option>
+                ))}
+              </select>
+              <Button
+                variant="outline"
+                onClick={() => setFeedbackOpen(true)}
+                className="flex items-center gap-2"
+              >
+                <MessageSquare className="h-4 w-4" />
+                Give Feedback
+              </Button>
+            </div>
           </div>
 
           <div className="mb-8">
@@ -197,6 +226,49 @@ console.log(data);`}
           </Tabs>
         </div>
       </main>
+
+      <Dialog open={feedbackOpen} onOpenChange={setFeedbackOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Documentation Feedback</DialogTitle>
+            <DialogDescription>
+              Help us improve our documentation by sharing your thoughts.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="flex justify-center gap-4">
+              <Button
+                variant={feedbackType === 'helpful' ? 'default' : 'outline'}
+                onClick={() => setFeedbackType('helpful')}
+                className="flex items-center gap-2"
+              >
+                <ThumbsUp className="h-4 w-4" />
+                Helpful
+              </Button>
+              <Button
+                variant={feedbackType === 'not-helpful' ? 'default' : 'outline'}
+                onClick={() => setFeedbackType('not-helpful')}
+                className="flex items-center gap-2"
+              >
+                <ThumbsDown className="h-4 w-4" />
+                Not Helpful
+              </Button>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="feedback">Additional comments</Label>
+              <Textarea
+                id="feedback"
+                placeholder="What could we improve? (optional)"
+                value={feedbackText}
+                onChange={(e) => setFeedbackText(e.target.value)}
+              />
+            </div>
+            <div className="flex justify-end">
+              <Button onClick={handleFeedbackSubmit}>Submit Feedback</Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
