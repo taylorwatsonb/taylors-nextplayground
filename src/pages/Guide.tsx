@@ -1,8 +1,9 @@
+
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AlertCircle, Book, Code, Zap, Layout, Database, Globe, Cpu, Lock, Search, Activity, Terminal } from 'lucide-react';
+import { AlertCircle, Book, Code, Zap, Layout, Database, Globe, Cpu, Lock, Search, Activity, Terminal, CheckCircle, XCircle } from 'lucide-react';
 
 const Guide = () => {
   return (
@@ -172,6 +173,113 @@ const Guide = () => {
 
           <Card className="p-6 animate-fade-up" style={{ animationDelay: "150ms" }}>
             <div className="flex items-center gap-2 mb-4">
+              <Code className="w-5 h-5 text-primary" />
+              <h2 className="text-xl font-semibold">Interactive Examples</h2>
+            </div>
+            <div className="space-y-4">
+              <div className="border rounded-lg p-4 bg-muted/50">
+                <h3 className="text-lg font-medium mb-2">API Route Handler</h3>
+                <pre className="bg-background p-4 rounded-md text-sm overflow-x-auto">
+                  {`export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  
+  return Response.json({ data: { id } });
+}`}
+                </pre>
+                <div className="mt-2 flex gap-2">
+                  <Badge variant="outline" className="bg-primary/10">Try It</Badge>
+                  <Badge variant="outline" className="bg-emerald-500/10 text-emerald-500">Copy</Badge>
+                </div>
+              </div>
+
+              <div className="border rounded-lg p-4 bg-muted/50">
+                <h3 className="text-lg font-medium mb-2">Client Data Fetching</h3>
+                <pre className="bg-background p-4 rounded-md text-sm overflow-x-auto">
+                  {`const { data, isLoading } = useQuery({
+  queryKey: ['todos'],
+  queryFn: async () => {
+    const res = await fetch('/api/todos')
+    return res.json()
+  }
+});`}
+                </pre>
+                <div className="mt-2 flex gap-2">
+                  <Badge variant="outline" className="bg-primary/10">Try It</Badge>
+                  <Badge variant="outline" className="bg-emerald-500/10 text-emerald-500">Copy</Badge>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 animate-fade-up" style={{ animationDelay: "300ms" }}>
+            <div className="flex items-center gap-2 mb-4">
+              <AlertCircle className="w-5 h-5 text-primary" />
+              <h2 className="text-xl font-semibold">Common Issues & Solutions</h2>
+            </div>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
+                  <XCircle className="w-4 h-4 text-red-500" />
+                  Hydration Errors
+                </h3>
+                <pre className="bg-red-500/10 text-red-600 p-4 rounded-md text-sm mb-2">
+                  {`Text content does not match server-rendered HTML`}
+                </pre>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
+                    <p className="text-sm">Use useEffect for client-side only code</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
+                    <p className="text-sm">Ensure consistent props between server and client</p>
+                  </div>
+                  <pre className="bg-emerald-500/10 text-emerald-600 p-4 rounded-md text-sm mt-2">
+                    {`useEffect(() => {
+  // Client-side code here
+}, []);`}
+                  </pre>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-2 flex items-center gap-2">
+                  <XCircle className="w-4 h-4 text-red-500" />
+                  API Route Issues
+                </h3>
+                <pre className="bg-red-500/10 text-red-600 p-4 rounded-md text-sm mb-2">
+                  {`API resolved without sending a response`}
+                </pre>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
+                    <p className="text-sm">Always return a Response object</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
+                    <p className="text-sm">Handle all possible execution paths</p>
+                  </div>
+                  <pre className="bg-emerald-500/10 text-emerald-600 p-4 rounded-md text-sm mt-2">
+                    {`export async function GET() {
+  try {
+    // Your logic here
+    return Response.json({ data });
+  } catch (error) {
+    return Response.json(
+      { error: 'Internal error' },
+      { status: 500 }
+    );
+  }
+}`}
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 animate-fade-up" style={{ animationDelay: "150ms" }}>
+            <div className="flex items-center gap-2 mb-4">
               <Zap className="w-5 h-5 text-primary" />
               <h2 className="text-xl font-semibold">Performance</h2>
             </div>
@@ -238,35 +346,32 @@ const Guide = () => {
 
           <Card className="p-6 animate-fade-up" style={{ animationDelay: "450ms" }}>
             <div className="flex items-center gap-2 mb-4">
-              <Code className="w-5 h-5 text-primary" />
-              <h2 className="text-xl font-semibold">Advanced Topics</h2>
+              <Terminal className="w-5 h-5 text-primary" />
+              <h2 className="text-xl font-semibold">Documentation Best Practices</h2>
             </div>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-2">
-                <Badge variant="outline">Authentication</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Implement secure authentication with NextAuth.js, handle JWT tokens, manage sessions, and integrate OAuth providers. Learn about role-based access control and security best practices.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Badge variant="outline">Middleware</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Create custom middleware for authentication, logging, and request transformation. Learn about edge functions, middleware composition, and response manipulation.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Badge variant="outline">Internationalization</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Set up multi-language support, implement language switching, handle RTL layouts, and manage translations. Learn about SEO optimization for multilingual content.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Badge variant="outline">Testing</Badge>
-                <span className="text-sm text-muted-foreground">
-                  Write unit tests with Jest, implement integration testing with Cypress, and set up end-to-end testing. Learn about test coverage and continuous integration.
-                </span>
-              </li>
-            </ul>
+            <div className="space-y-4">
+              <div className="border rounded-lg p-4">
+                <h3 className="text-lg font-medium mb-2">Style Guide</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>• Use clear, concise language</li>
+                  <li>• Include practical code examples</li>
+                  <li>• Follow consistent formatting</li>
+                  <li>• Provide troubleshooting steps</li>
+                  <li>• Include version information</li>
+                </ul>
+              </div>
+              
+              <div className="border rounded-lg p-4">
+                <h3 className="text-lg font-medium mb-2">Documentation Structure</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>• Clear hierarchy of information</li>
+                  <li>• Progressive disclosure of complexity</li>
+                  <li>• Consistent navigation patterns</li>
+                  <li>• Related content linking</li>
+                  <li>• Search-optimized content</li>
+                </ul>
+              </div>
+            </div>
           </Card>
         </div>
       </main>

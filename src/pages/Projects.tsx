@@ -13,6 +13,13 @@ const projects = [
     topics: ["Documentation", "MDX", "Search", "Interactive Examples", "Troubleshooting", "API Reference"]
   },
   {
+    title: "Developer Style Guide",
+    description: "Create a comprehensive style guide for technical documentation, covering writing standards, code examples, and documentation structure. Includes templates, checklists, and best practices for maintaining consistent documentation across projects.",
+    duration: "4 hours",
+    difficulty: "Intermediate",
+    topics: ["Style Guide", "Templates", "Best Practices", "Documentation"]
+  },
+  {
     title: "Authentication System",
     description: "Build a complete auth system with email/password and social login using Next.js and Supabase.",
     duration: "4 hours",
