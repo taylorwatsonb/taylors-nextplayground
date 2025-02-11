@@ -1,4 +1,5 @@
 
+import { ToastProvider } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,18 +19,20 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="system" storageKey="app-theme">
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/paths" element={<LearningPaths />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/guide" element={<Guide />} />
-            <Route path="/docs" element={<Documentation />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <ToastProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/paths" element={<LearningPaths />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/guide" element={<Guide />} />
+              <Route path="/docs" element={<Documentation />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </ToastProvider>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
