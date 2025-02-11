@@ -1,11 +1,67 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AlertCircle, Book, Code, Zap, Layout, Database, Globe, Cpu, Lock, Search, Activity, Terminal, CheckCircle, XCircle } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 
 const Guide = () => {
+  const { toast } = useToast();
+  const [apiResponse, setApiResponse] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const copyToClipboard = async (code: string) => {
+    try {
+      await navigator.clipboard.writeText(code);
+      toast({
+        title: "Copied to clipboard",
+        description: "Code has been copied successfully!",
+      });
+    } catch (err) {
+      toast({
+        variant: "destructive",
+        title: "Failed to copy",
+        description: "Please try again.",
+      });
+    }
+  };
+
+  const tryApiExample = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+      const data = await response.json();
+      setApiResponse(JSON.stringify(data, null, 2));
+      toast({
+        title: "API Call Successful",
+        description: "Check the response below!",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "API Call Failed",
+        description: "Something went wrong. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const apiExampleCode = `export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  
+  return Response.json({ data: { id } });
+}`;
+
+  const clientFetchCode = `const { data, isLoading } = useQuery({
+  queryKey: ['todos'],
+  queryFn: async () => {
+    const res = await fetch('/api/todos')
+    return res.json()
+  }
+});`;
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -180,33 +236,59 @@ const Guide = () => {
               <div className="border rounded-lg p-4 bg-muted/50">
                 <h3 className="text-lg font-medium mb-2">API Route Handler</h3>
                 <pre className="bg-background p-4 rounded-md text-sm overflow-x-auto">
-                  {`export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id');
-  
-  return Response.json({ data: { id } });
-}`}
+                  {apiExampleCode}
                 </pre>
                 <div className="mt-2 flex gap-2">
-                  <Badge variant="outline" className="bg-primary/10">Try It</Badge>
-                  <Badge variant="outline" className="bg-emerald-500/10 text-emerald-500">Copy</Badge>
+                  <Badge 
+                    variant="outline" 
+                    className="bg-primary/10 cursor-pointer hover:bg-primary/20 transition-colors"
+                    onClick={tryApiExample}
+                  >
+                    {isLoading ? 'Loading...' : 'Try It'}
+                  </Badge>
+                  <Badge 
+                    variant="outline" 
+                    className="bg-emerald-500/10 text-emerald-500 cursor-pointer hover:bg-emerald-500/20 transition-colors"
+                    onClick={() => copyToClipboard(apiExampleCode)}
+                  >
+                    Copy
+                  </Badge>
                 </div>
+                {apiResponse && (
+                  <div className="mt-4">
+                    <h4 className="text-sm font-medium mb-2">Response:</h4>
+                    <pre className="bg-background p-4 rounded-md text-sm overflow-x-auto">
+                      {apiResponse}
+                    </pre>
+                  </div>
+                )}
               </div>
 
               <div className="border rounded-lg p-4 bg-muted/50">
                 <h3 className="text-lg font-medium mb-2">Client Data Fetching</h3>
                 <pre className="bg-background p-4 rounded-md text-sm overflow-x-auto">
-                  {`const { data, isLoading } = useQuery({
-  queryKey: ['todos'],
-  queryFn: async () => {
-    const res = await fetch('/api/todos')
-    return res.json()
-  }
-});`}
+                  {clientFetchCode}
                 </pre>
                 <div className="mt-2 flex gap-2">
-                  <Badge variant="outline" className="bg-primary/10">Try It</Badge>
-                  <Badge variant="outline" className="bg-emerald-500/10 text-emerald-500">Copy</Badge>
+                  <Badge 
+                    variant="outline" 
+                    className="bg-primary/10 cursor-pointer hover:bg-primary/20 transition-colors"
+                    onClick={() => {
+                      toast({
+                        title: "Client Code Example",
+                        description: "This code needs to be integrated into a React component to work.",
+                      });
+                    }}
+                  >
+                    Try It
+                  </Badge>
+                  <Badge 
+                    variant="outline" 
+                    className="bg-emerald-500/10 text-emerald-500 cursor-pointer hover:bg-emerald-500/20 transition-colors"
+                    onClick={() => copyToClipboard(clientFetchCode)}
+                  >
+                    Copy
+                  </Badge>
                 </div>
               </div>
             </div>
