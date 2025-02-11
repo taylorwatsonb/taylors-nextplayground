@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import CourseGrid from '@/components/CourseGrid';
 import LearningPath from '@/components/LearningPath';
@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Book, Code, Terminal, Github, Layout, Database, Globe, Cpu, Lock, Search, Activity } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const beginnerPath = {
   title: "Next.js Fundamentals",
@@ -29,33 +30,102 @@ const beginnerPath = {
 
 const documentationSections = [
   {
+    id: "api",
     icon: Book,
     title: "API Reference",
     description: "Comprehensive API documentation with interactive examples, type definitions, and best practices.",
-    badge: "New"
+    badge: "New",
+    content: `
+      <h3 class="text-xl font-semibold mb-4">API Documentation</h3>
+      <div class="space-y-4">
+        <div class="border rounded-lg p-4">
+          <h4 class="font-medium mb-2">GET /api/courses</h4>
+          <p class="text-sm text-muted-foreground">Retrieve a list of available courses.</p>
+          <pre class="mt-2 bg-muted p-2 rounded"><code>GET /api/courses</code></pre>
+        </div>
+        <div class="border rounded-lg p-4">
+          <h4 class="font-medium mb-2">POST /api/enroll</h4>
+          <p class="text-sm text-muted-foreground">Enroll in a specific course.</p>
+          <pre class="mt-2 bg-muted p-2 rounded"><code>POST /api/enroll { courseId: string }</code></pre>
+        </div>
+      </div>
+    `
   },
   {
+    id: "code",
     icon: Code,
     title: "Code Examples",
     description: "Well-documented code samples with TypeScript and error handling patterns.",
-    badge: "Popular"
+    badge: "Popular",
+    content: `
+      <h3 class="text-xl font-semibold mb-4">Code Examples</h3>
+      <div class="space-y-4">
+        <div class="border rounded-lg p-4">
+          <h4 class="font-medium mb-2">Error Handling Pattern</h4>
+          <pre class="bg-muted p-2 rounded">
+<code>try {
+  const data = await fetchData();
+  return data;
+} catch (error) {
+  if (error instanceof ApiError) {
+    console.error('API Error:', error.message);
+  }
+  throw error;
+}</code></pre>
+        </div>
+      </div>
+    `
   },
   {
+    id: "cli",
     icon: Terminal,
     title: "CLI Tools",
     description: "Command-line tools and utilities for improved developer workflow.",
-    badge: "Beta"
+    badge: "Beta",
+    content: `
+      <h3 class="text-xl font-semibold mb-4">CLI Commands</h3>
+      <div class="space-y-4">
+        <div class="border rounded-lg p-4">
+          <h4 class="font-medium mb-2">Create New Project</h4>
+          <pre class="bg-muted p-2 rounded"><code>npx create-next-app@latest</code></pre>
+          <p class="text-sm text-muted-foreground mt-2">Creates a new Next.js project with recommended defaults.</p>
+        </div>
+        <div class="border rounded-lg p-4">
+          <h4 class="font-medium mb-2">Development Server</h4>
+          <pre class="bg-muted p-2 rounded"><code>npm run dev</code></pre>
+          <p class="text-sm text-muted-foreground mt-2">Starts the development server with hot reloading.</p>
+        </div>
+      </div>
+    `
   },
   {
+    id: "community",
     icon: Github,
     title: "Community",
     description: "Join our community of developers, share knowledge, and contribute.",
-    badge: "Active"
+    badge: "Active",
+    content: `
+      <h3 class="text-xl font-semibold mb-4">Join Our Community</h3>
+      <div class="space-y-4">
+        <p class="text-muted-foreground">Connect with other developers, share your knowledge, and get help from the community.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="border rounded-lg p-4">
+            <h4 class="font-medium mb-2">Discord Server</h4>
+            <p class="text-sm text-muted-foreground">Join our active Discord community for real-time discussions.</p>
+          </div>
+          <div class="border rounded-lg p-4">
+            <h4 class="font-medium mb-2">GitHub Discussions</h4>
+            <p class="text-sm text-muted-foreground">Participate in technical discussions and feature requests.</p>
+          </div>
+        </div>
+      </div>
+    `
   }
 ];
 
 const Index = () => {
   const { toast } = useToast();
+  const [activeTab, setActiveTab] = useState("api");
 
   const handleContribute = () => {
     toast({
@@ -80,38 +150,52 @@ const Index = () => {
         <div className="space-y-24">
           <section>
             <h2 className="text-2xl font-semibold tracking-tight mb-8">Documentation</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {documentationSections.map((section) => (
-                <Card 
-                  key={section.title}
-                  className="p-6 hover:border-primary/50 transition-colors cursor-pointer group"
-                  onClick={() => {
-                    if (section.title === "Community") {
-                      handleContribute();
-                    }
-                  }}
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                      <section.icon className="w-6 h-6" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold group-hover:text-primary transition-colors">
-                          {section.title}
-                        </h3>
-                        <Badge variant="secondary" className="text-xs">
-                          {section.badge}
-                        </Badge>
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {documentationSections.map((section) => (
+                  <Card 
+                    key={section.title}
+                    className={`p-6 hover:border-primary/50 transition-colors cursor-pointer group ${activeTab === section.id ? 'border-primary' : ''}`}
+                    onClick={() => {
+                      if (section.id === "community") {
+                        handleContribute();
+                      } else {
+                        setActiveTab(section.id);
+                      }
+                    }}
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                        <section.icon className="w-6 h-6" />
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        {section.description}
-                      </p>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="font-semibold group-hover:text-primary transition-colors">
+                            {section.title}
+                          </h3>
+                          <Badge variant="secondary" className="text-xs">
+                            {section.badge}
+                          </Badge>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          {section.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
+                  </Card>
+                ))}
+              </div>
+              <div className="mt-8">
+                {documentationSections.map((section) => (
+                  <TabsContent 
+                    key={section.id} 
+                    value={section.id}
+                    className="border rounded-lg p-6"
+                    dangerouslySetInnerHTML={{ __html: section.content }}
+                  />
+                ))}
+              </div>
+            </Tabs>
           </section>
 
           <section>
