@@ -20,6 +20,9 @@ const Navigation = () => {
           <Link to="/guide" className="text-sm font-medium hover:text-primary/80 transition-colors">
             Guide
           </Link>
+          <Link to="/docs" className="text-sm font-medium hover:text-primary/80 transition-colors">
+            Documentation
+          </Link>
           <ThemeToggle />
         </div>
       </div>
