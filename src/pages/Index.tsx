@@ -159,8 +159,16 @@ const Index = () => {
         <div className="space-y-24">
           <section>
             <h2 className="text-2xl font-semibold tracking-tight mb-8">Documentation</h2>
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="w-full flex-wrap justify-start">
+                {documentationSections.map((section) => (
+                  <TabsTrigger key={section.id} value={section.id}>
+                    {section.title}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {documentationSections.map((section) => (
                   <Card 
                     key={section.title}
@@ -194,13 +202,7 @@ const Index = () => {
                   </Card>
                 ))}
               </div>
-              <TabsList className="mt-6">
-                {documentationSections.map((section) => (
-                  <TabsTrigger key={section.id} value={section.id}>
-                    {section.title}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+
               <div className="mt-8">
                 {documentationSections.map((section) => (
                   <TabsContent 
