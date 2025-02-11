@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface Step {
   title: string;
@@ -18,6 +19,7 @@ interface LearningPathProps {
 
 const LearningPath = ({ title, description, steps }: LearningPathProps) => {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [expandedStep, setExpandedStep] = useState<number | null>(null);
   const { toast } = useToast();
 
   const progress = (completedSteps.length / steps.length) * 100;
@@ -39,6 +41,10 @@ const LearningPath = ({ title, description, steps }: LearningPathProps) => {
     });
   };
 
+  const toggleExpand = (index: number) => {
+    setExpandedStep(expandedStep === index ? null : index);
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="space-y-2">
@@ -56,20 +62,71 @@ const LearningPath = ({ title, description, steps }: LearningPathProps) => {
         {steps.map((step, index) => (
           <div
             key={step.title}
-            className="flex items-start space-x-4 p-4 rounded-lg border bg-card animate-fade-up"
+            className="rounded-lg border bg-card animate-fade-up"
             style={{ animationDelay: `${index * 100}ms` }}
           >
-            <div className="flex-none pt-1">
-              <Checkbox
-                checked={completedSteps.includes(index)}
-                onCheckedChange={() => handleStepToggle(index)}
-                className="w-5 h-5"
-              />
+            <div 
+              className="flex items-start space-x-4 p-4 cursor-pointer"
+              onClick={() => toggleExpand(index)}
+            >
+              <div className="flex-none pt-1">
+                <Checkbox
+                  checked={completedSteps.includes(index)}
+                  onCheckedChange={(checked) => {
+                    if (checked) handleStepToggle(index);
+                  }}
+                  className="w-5 h-5"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+              <div className="flex-1 space-y-1">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-medium">{step.title}</h3>
+                  {expandedStep === index ? (
+                    <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                  )}
+                </div>
+                <p className="text-sm text-muted-foreground">{step.description}</p>
+              </div>
             </div>
-            <div className="space-y-1">
-              <h3 className="font-medium">{step.title}</h3>
-              <p className="text-sm text-muted-foreground">{step.description}</p>
-            </div>
+            {expandedStep === index && (
+              <div className="px-4 pb-4 pt-2 border-t">
+                <div className="prose prose-sm dark:prose-invert max-w-none">
+                  <h4 className="text-base font-medium mb-2">Tutorial Content</h4>
+                  <p>
+                    Here's a detailed guide for mastering {step.title}:
+                  </p>
+                  <pre className="bg-muted p-4 rounded-lg mt-2 overflow-x-auto">
+                    <code>{`// Example code for ${step.title}
+import { useState } from 'react'
+
+export default function Example() {
+  // Implementation details will go here
+  return (
+    <div>
+      {/* Component structure */}
+    </div>
+  )
+}`}</code>
+                  </pre>
+                  <h5 className="text-sm font-medium mt-4">Key Concepts:</h5>
+                  <ul className="list-disc pl-4 mt-2 space-y-1">
+                    <li>Understanding the fundamentals</li>
+                    <li>Best practices and patterns</li>
+                    <li>Common pitfalls to avoid</li>
+                    <li>Performance considerations</li>
+                  </ul>
+                  <div className="mt-4 p-4 bg-muted rounded-lg">
+                    <p className="text-sm font-medium">Pro Tip:</p>
+                    <p className="text-sm mt-1">
+                      Always consider edge cases and error handling when implementing this feature.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
