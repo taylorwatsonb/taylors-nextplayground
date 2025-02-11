@@ -1,17 +1,16 @@
-
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Code, GitFork, Bookmark, Layout, Image, Lock, ShoppingCart, Globe } from 'lucide-react';
+import { Clock, Code, GitFork, Bookmark, Layout, Image, Lock, ShoppingCart, Globe, FileText } from 'lucide-react';
 
 const projects = [
   {
-    title: "Personal Blog with MDX",
-    description: "Create a dynamic blog using Next.js, MDX for content, and implement syntax highlighting.",
-    duration: "3 hours",
-    difficulty: "Beginner",
-    topics: ["MDX", "Dynamic Routes", "Styling"]
+    title: "Technical Documentation Site",
+    description: "Build a comprehensive documentation site with search, navigation, and interactive code examples. Perfect as a writing sample!",
+    duration: "4 hours",
+    difficulty: "Intermediate",
+    topics: ["Documentation", "MDX", "Search"]
   },
   {
     title: "Authentication System",
