@@ -129,5 +129,5 @@ This project is open source and available under the MIT license.
 
 ## Contact
 
-Taylor Watson - [Your Contact Information]
-Project Link: [Your Repository URL]
+Taylor Watson - Email: taylorwatsonb@gmail.com ; Linkedin: https://www.linkedin.com/in/taylorwatsonb/
+Project Link: https://taylors-nextplayground--two.vercel.app/
