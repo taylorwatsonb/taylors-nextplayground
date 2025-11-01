@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
+import { DocumentHead } from '@/components/DocumentHead';
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Search, Book, Code, FileText, Bug, Terminal, Database, Globe, MessageSquare, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { DOCUMENTATION_VERSIONS } from "@/lib/constants";
 
 const Documentation = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,7 +26,7 @@ const data = await response.json();
 console.log(data);`);
   const { toast } = useToast();
 
-  const versions = ['v1.0', 'v0.9', 'v0.8'];
+  const versions = DOCUMENTATION_VERSIONS;
 
   const handleRunCode = async () => {
     try {
@@ -185,6 +187,10 @@ console.log(data);`);
 
   return (
     <div className="min-h-screen bg-background">
+      <DocumentHead 
+        title="Documentation"
+        description="Comprehensive Next.js documentation with interactive examples, API references, and troubleshooting guides."
+      />
       <Navigation />
       <main className="container mx-auto px-4 pt-24 pb-16">
         <div className="max-w-7xl mx-auto">

@@ -1,9 +1,11 @@
 
 import React from 'react';
 import Navigation from '@/components/Navigation';
+import { DocumentHead } from '@/components/DocumentHead';
 import LearningPath from '@/components/LearningPath';
+import type { LearningPath as LearningPathType } from '@/lib/types';
 
-const paths = [
+const paths: LearningPathType[] = [
   {
     title: "Next.js Core Concepts",
     description: "Master the fundamental concepts of Next.js that are essential for a DEX Engineer role at Vercel.",
@@ -113,6 +115,10 @@ const paths = [
 const LearningPaths = () => {
   return (
     <div className="min-h-screen bg-background">
+      <DocumentHead 
+        title="Learning Paths"
+        description="Comprehensive learning paths focused on Vercel's platform, Next.js, and developer experience engineering."
+      />
       <Navigation />
       <main className="container mx-auto px-4 pt-24 pb-16">
         <div className="max-w-3xl mx-auto text-center mb-16 space-y-4 animate-fade-up">

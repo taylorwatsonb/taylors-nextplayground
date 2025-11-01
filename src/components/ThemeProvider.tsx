@@ -1,9 +1,5 @@
-
-"use client"
-
 import * as React from "react";
-
-type Theme = "dark" | "light" | "system";
+import type { Theme } from "@/lib/types";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -22,7 +18,6 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "vite-ui-theme",
-  ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = React.useState<Theme>(() => {
     if (typeof window !== 'undefined') {
@@ -61,7 +56,7 @@ export function ThemeProvider({
   );
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider value={value}>
       {children}
     </ThemeProviderContext.Provider>
   );

@@ -56,27 +56,52 @@ As a DX Engineer, I've implemented several features to enhance the developer exp
 
 ```sh
 # Clone the repository
-git clone <YOUR_REPO_URL>
+git clone https://github.com/taylorwatsonb/taylors-nextplayground.git
 
 # Navigate to project directory
-cd nextplayground
+cd taylors-nextplayground
 
 # Install dependencies
 npm install
 
+# Install Prettier for code formatting (optional but recommended)
+npm install --save-dev prettier
+
 # Start development server
 npm run dev
 ```
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors automatically
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+- `npm run type-check` - Run TypeScript type checking
 
 ## Project Structure
 
 ```
 src/
 ├── components/         # Reusable UI components
-├── pages/             # Route pages
+│   ├── ui/            # shadcn/ui components
+│   ├── ErrorBoundary.tsx
+│   ├── LoadingSpinner.tsx
+│   ├── Skeleton.tsx
+│   ├── DocumentHead.tsx
+│   ├── Navigation.tsx
+│   └── ...           # Other components
+├── pages/             # Route pages (lazy loaded)
 ├── hooks/             # Custom React hooks
-├── lib/              # Utility functions
-└── styles/           # Global styles and Tailwind config
+├── lib/               # Utility functions
+│   ├── types.ts      # TypeScript type definitions
+│   ├── constants.ts  # Application constants
+│   ├── env.ts        # Environment variables
+│   └── utils.ts      # Utility functions
+└── integrations/     # Third-party integrations (Supabase)
 ```
 
 ## Developer Tools
@@ -88,12 +113,17 @@ src/
 
 ## Best Practices Implemented
 
-- Consistent code formatting with Prettier
-- Type-safe development with TypeScript
-- Accessible UI components following WCAG guidelines
-- Responsive design patterns
-- Performance optimization techniques
-- Clean code principles and documentation
+- ✅ Consistent code formatting with Prettier
+- ✅ Type-safe development with TypeScript
+- ✅ Accessible UI components following WCAG guidelines
+- ✅ Responsive design patterns
+- ✅ Performance optimization techniques (code splitting, lazy loading)
+- ✅ Clean code principles and documentation
+- ✅ Error boundaries for graceful error handling
+- ✅ Loading states and skeleton components
+- ✅ SEO optimization with dynamic meta tags
+- ✅ Environment variable validation
+- ✅ Centralized constants and type definitions
 
 ## Learning Resources
 
@@ -105,12 +135,30 @@ The platform includes:
 - Performance optimization guides
 - Debugging tutorials
 
+## Recent Improvements
+
+See [IMPROVEMENTS.md](./IMPROVEMENTS.md) for a detailed list of all improvements made to the project, including:
+
+- Error boundaries and loading states
+- Code splitting and performance optimizations
+- SEO enhancements
+- TypeScript improvements
+- Code organization and developer experience
+
 ## Contributing
 
 While this is a personal project showcasing DX engineering skills, feedback and suggestions are welcome! Feel free to:
+
 1. Open issues for bugs or suggestions
 2. Submit pull requests for improvements
 3. Share feedback on the learning experience
+
+### Development Guidelines
+
+- Follow the existing code style
+- Run `npm run format` before committing
+- Run `npm run lint` to check for errors
+- Run `npm run type-check` to verify TypeScript types
 
 ## About the Developer
 

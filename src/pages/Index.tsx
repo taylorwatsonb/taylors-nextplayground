@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
+import { DocumentHead } from '@/components/DocumentHead';
 import CourseGrid from '@/components/CourseGrid';
 import LearningPath from '@/components/LearningPath';
 import { useToast } from '@/hooks/use-toast';
@@ -8,6 +9,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Book, Code, Terminal, Github } from 'lucide-react';
+import type { DocumentationSection } from '@/lib/types';
 
 const beginnerPath = {
   title: "Next.js Platform Engineering",
@@ -28,7 +30,7 @@ const beginnerPath = {
   ]
 };
 
-const documentationSections = [
+const documentationSections: DocumentationSection[] = [
   {
     id: "api",
     icon: Book,
@@ -145,6 +147,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <DocumentHead 
+        title="Home"
+        description="Master Next.js through comprehensive documentation, interactive examples, and community-driven resources."
+      />
       <Navigation />
       <main className="container mx-auto px-4 pt-24 pb-16">
         <div className="max-w-3xl mx-auto text-center mb-16 space-y-4 animate-fade-up">
